@@ -2,23 +2,20 @@ import { create_rectangle, create_sprite, create_text, query_position, update_co
 enable_debug(); // Uncomment this to see debug info
 
 // Constants
-let snake_length = 4;
-const food_growth = 4;
 set_fps(30);
 
 const snake = [];
 const size = 600;
-const unit = 60;
+const unit = 20;
 const grid = size / unit;
-const start_length = snake_length;
 const background = create_sprite("https://labs.phaser.io/assets/games/germs/background.png");
 
 
 // Create Sprite Gameobjects
 // update_scale(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"), [4,4]); // Background
-const food = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
+// const food = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
+const player = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
 
-let eaten = true;
 
 // for (let i = 0; i < 1000; i = i + 1) {
 //   snake[i] = update_color(update_position(create_rectangle(unit, unit), [-unit / 2, -unit / 2]),
@@ -63,32 +60,69 @@ const bg_audio = play_audio(loop_audio(create_audio("https://labs.phaser.io/asse
 
 
 const map = [];
-for (let i = 0; i < 10; i = i + 1) {
+for (let i = 0; i < grid; i = i + 1) {
     map[i] = [];
-    for (let j = 0; j < 10; j = j + 1) { 
+    for (let j = 0; j < grid; j = j + 1) { 
         map[i][j] = update_color(update_position(create_rectangle(unit, unit), [i * unit+unit/2, j * unit+unit/2]),
                     [255,255,255,255]); 
         
     }
 }
 
-const mp = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 1, 1, 1, 1, 1, 1, 0, 0], 
-            [0, 0, 1, 0, 0, 1, 0, 1, 0, 0], 
-            [0, 0, 1, 1, 0, 0, 0, 1, 0, 0], 
-            [0, 0, 1, 2, 0, 0, 0, 1, 0, 0], 
-            [0, 0, 1, 0, 0, 0, 1, 1, 0, 0], 
-            [0, 0, 1, 1, 1, 1, 1, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+const mp = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
+            [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
+            [0, 0, 1, 2, 0, 0, 1,11, 0,10, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 1,10, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1,11, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ];
 
 
 update_scale(background, [4,4]);
+
 let k = 1;
 
 let x = 0;
 let y = 0;
+
+function portal(_x, _y) {
+    const id = mp[_x][_y];
+    for (let i = 0; i < grid; i = i + 1) {
+         for (let j = 0; j < grid; j = j + 1) {
+             if(i !== _x || j !== _y) {
+                 if (mp[i][j] === id) {
+                     x = i;
+                     y = j;
+                     return undefined;
+                 }
+             }
+         }
+    }
+}
+
 function go() {
     if(move_dir[0] === 0 && move_dir[1] === 0) {
         return false;
@@ -98,18 +132,25 @@ function go() {
     if (mp[newx][newy] === 1) {
         return false;
     }
+    else if (mp[newx][newy] >= 10) {
+        portal(newx, newy);
+        return true;
+    }
     else {
-        mp[x][y] = 3;
+        // mp[x][y] = 3;
         x = newx;
         y = newy;
-        mp[x][y] = 2;
+        if (mp[x][y] === 0) {
+            mp[x][y] = 3;
+        }
         return true;
     }
 }
 function getxy() {
-    for (let i = 0; i < 10; i = i + 1) {
-         for (let j = 0; j < 10; j = j + 1) {
+    for (let i = 0; i < grid; i = i + 1) {
+         for (let j = 0; j < grid; j = j + 1) {
              if(mp[i][j] === 2) {
+                 mp[i][j] = 3;
                  x = i;
                  y = j;
                  return undefined;
@@ -118,8 +159,8 @@ function getxy() {
     }
 }
 function upd_map() {
-    for (let i = 0; i < 10; i = i + 1) {
-         for (let j = 0; j < 10; j = j + 1) {
+    for (let i = 0; i < grid; i = i + 1) {
+         for (let j = 0; j < grid; j = j + 1) {
              if (mp[i][j] === 0) { 
                  update_position(map[i][j], [-2*unit, -2*unit]); 
                  continue; 
@@ -128,32 +169,40 @@ function upd_map() {
              else if (mp[i][j] === 1) {
                  update_position(map[i][j],[j*unit+unit/2, i*unit+unit/2]);
              }
-             else if(mp[i][j] === 2) {
-                 update_position(map[i][j], [-2*unit, -2/unit]);
-                 update_position(food, [j*unit+unit/2, i*unit+unit/2]); 
-                 debug_log(food);
-                 debug_log(query_position(food));
-             }
              else if (mp[i][j] === 3) {
                  update_color(update_position(map[i][j], [j * unit+unit/2, i * unit+unit/2]),
                     [238,130,238,255]);
              }
+             else if (mp[i][j] >= 10) {
+                 update_color(update_position(map[i][j], [j * unit+unit/2, i * unit+unit/2]),
+                    [mp[i][j] * 20, mp[i][j] * 5, mp[i][j] * 20 ,255]);
+             }
          }
      }
+     update_position(player, [y*unit+unit/2, x*unit+unit/2]);
+     update_to_top(player);
 }
 // update_scale(background, [4,4]);
+let las = false;
 update_loop(game_state => {
+    // init();
     getxy();
     // 
       // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
      upd_map();
     //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
-     input();
+     if (las === false) {
+         input();
+     }
      debug_log(move_dir);
-     while(go()) {
+     if (go()) {
          upd_map();
          debug_log(x);
          debug_log(y);
+         las = true;
+     }
+     else {
+         las = false;
      }
      
     //  k = k + 1;
