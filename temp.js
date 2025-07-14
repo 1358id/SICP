@@ -33,18 +33,42 @@ let move_dir = [0, 0];
 // Other functions
 const add_vec = (v1, v2) => [v1[0] + v2[0], v1[1] + v2[1]];
 const bound_vec = v => [(v[0] + size) % size, (v[1] + size) % size];
+
+let turn_key = false;
+let turn_key_flg = false;
 function input() {
+
    if (input_key_down("w")) {
+	if(turn_key) {
+		move_dir = [1, 0];
+	}
+	else {
        move_dir = [-1, 0];
+	}
        play_audio(move);
    } else if (input_key_down("a")) {
+	if(turn_key) {
+		move_dir = [0, 1];
+	}
+	else {
        move_dir = [0, -1];
+	}
        play_audio(move);
    } else if (input_key_down("s")) {
+	if(turn_key) {
+		move_dir = [-1, 0];
+	}
+	else {
        move_dir = [1, 0];
+	}
        play_audio(move);
    } else if (input_key_down("d")) {
+       if(turn_key) {
+		move_dir = [0, -1];
+	}
+	else {
        move_dir = [0, 1];
+	}
        play_audio(move);
    }
 }
@@ -112,7 +136,7 @@ const obj = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
             [0, 0, 0, 2, 0, 0, 0,11, 0,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
@@ -170,6 +194,9 @@ function init() {
 			if (obj[i][j] === 4) {
 				mapobj[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png"), [j * unit + unit / 2, i * unit + unit / 2]); 
 			}
+			if (obj[i][j] === -1) {
+				mapobj[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png"), [j * unit + unit / 2, i * unit + unit / 2]); 
+			}
             // map[i][j] = update_color(update_position(create_rectangle(unit, unit), [i * unit+unit/2, j * unit+unit/2]),
             //             [255,255,255,255]); 
             
@@ -222,6 +249,9 @@ function go() {
         if (mp[x][y] === 0) {
             mp[x][y] = 3;
         }
+		if (obj[x][y] === -1) {
+			turn_key_flg = true;
+		}
         return true;
     }
 }
@@ -331,6 +361,10 @@ update_loop(game_state => {
      }
      else {
          las = false;
+		 if (turn_key_flg) {
+			turn_key_flg = false;
+			turn_key = !turn_key;
+		 }
      }
      update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
     update_to_top(player);
