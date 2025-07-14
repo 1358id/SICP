@@ -1,10 +1,10 @@
+
 import { get_game_time, create_rectangle, create_sprite, create_text, query_position, update_color, update_position, update_scale, update_text, update_to_top, set_fps, get_loop_count, enable_debug, debug_log, input_key_down, gameobjects_overlap, update_loop, build_game, create_audio, loop_audio, stop_audio, play_audio } from "arcade_2d";
-enable_debug(); // Uncomment this to see debug info
+// enable_debug(); // Uncomment this to see debug info
 
 // Constants
 set_fps(30);
 
-const snake = [];
 const size = 600;
 const unit = 20;
 const grid = size / unit;
@@ -18,8 +18,8 @@ const player = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png")
 // const _1 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png");
 // const _2 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png");
 
-const portals = [[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png")]
-                ,[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png")]];
+// const portals = [[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png")]
+//                 ,[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png")]];
 
 
 // for (let i = 0; i < 1000; i = i + 1) {
@@ -65,12 +65,14 @@ const bg_audio = play_audio(loop_audio(create_audio("https://labs.phaser.io/asse
 
 
 const map = [];
+const map_filled = [];
+const mapobj = [];
 for (let i = 0; i < grid; i = i + 1) {
     map[i] = [];
+    map_filled[i] = [];
     for (let j = 0; j < grid; j = j + 1) { 
-        map[i][j] = update_color(update_position(create_rectangle(unit, unit), [i * unit+unit/2, j * unit+unit/2]),
-                    [255,255,255,255]); 
-        
+        map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png"), [i * unit+unit/2, j * unit+unit/2]); 
+        map_filled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png"), [-unit/2, -unit/2]); 
     }
 }
 
@@ -91,16 +93,16 @@ const mp = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ];
@@ -119,30 +121,61 @@ const obj = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0,12, 0, 0, 0, 0,-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+            [0, 0, 0,-0, 0, 0, 0, 0,-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ];
 
+// let ud1 = [];
 
-let portal_cnt = [0,0,0,0,0,0,0,0,0,0];
+
+// let portal_cnt = [0,0,0,0,0,0,0,0,0,0];
 update_scale(background, [4,4]);
 
 let k = 1;
 
 let x = 0;
 let y = 0;
+
+let to_be_init = true;
+function init() {
+    if (!to_be_init) {
+        return undefined;
+    }
+    to_be_init = false;
+    for (let i = 0; i < grid; i = i + 1) {
+        mapobj[i] = [];
+        for (let j = 0; j < grid; j = j + 1) { 
+            mapobj[i][j] = undefined;
+            if (obj[i][j] >= 10) {
+                mapobj[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png"), [j * unit + unit / 2, i * unit + unit / 2]); 
+                // update_position(mapobj[i][j], [j * unit + unit / 2, i * unit + unit / 2]);
+                // update_to_top(mapobj[i][j]);   
+                
+            }
+			if (obj[i][j] === 3) {
+				mapobj[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png"), [j * unit + unit / 2, i * unit + unit / 2]); 
+			}
+			if (obj[i][j] === 4) {
+				mapobj[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png"), [j * unit + unit / 2, i * unit + unit / 2]); 
+			}
+            // map[i][j] = update_color(update_position(create_rectangle(unit, unit), [i * unit+unit/2, j * unit+unit/2]),
+            //             [255,255,255,255]); 
+            
+        }
+    }
+}
 
 function portal(_x, _y) {
     const id = obj[_x][_y];
@@ -173,11 +206,17 @@ function go() {
         portal(newx, newy);
         return true;
     }
+	else if (obj[newx][newy] === 3 && move_dir[1] === 0) {
+		return false;
+	}
+	else if (obj[newx][newy] === 4 && move_dir[0] === 0) {
+		return false;
+	}
     else {
         // mp[x][y] = 3;
-        // if (mp[x][y] === 0) {
-        //     mp[x][y] = 3;
-        // }
+        if (mp[x][y] === 0) {
+            mp[x][y] = 3;
+        }
         x = newx;
         y = newy;
         if (mp[x][y] === 0) {
@@ -199,10 +238,11 @@ function getxy() {
          }
     }
 }
+/*
 function upd_map() {
-    for (let i = 0; i < 10; i = i + 1) {
-        portal_cnt[i] = 0;
-    }
+    // for (let i = 0; i < 10; i = i + 1) {
+    //     portal_cnt[i] = 0;
+    // }
     for (let i = 0; i < grid; i = i + 1) {
          for (let j = 0; j < grid; j = j + 1) {
             //  if (obj[i][j] !== 0) {
@@ -211,23 +251,26 @@ function upd_map() {
             //  } 
              if (mp[i][j] === 0) { 
                  update_position(map[i][j], [-2*unit, -2*unit]); 
+                 update_position(map_filled[i][j], [-2*unit, -2*unit]); 
              }
              else if (mp[i][j] === 1) {
                 //  debug_log(i*100+j);
                  update_position(map[i][j],[j*unit+unit/2, i*unit+unit/2]);
+                 update_position(map_filled[i][j], [-2*unit, -2*unit]); 
              }
              else if (mp[i][j] === 3) {
                 //  debug_log(i*100+j);
-                 update_color(update_position(map[i][j], [j * unit+unit/2, i * unit+unit/2]),
-                    [238,130,238,255]);
+                update_position(map[i][j], [-2*unit, -2*unit]); 
+                update_position(map_filled[i][j],[j*unit+unit/2, i*unit+unit/2]);
              }
-             if (obj[i][j] >= 10) {
-                 debug_log(i*100+j);
+             if (mapobj[i][j] !== undefined) {
+                update_position(mapobj[i][j], [j*unit+unit/2, i*unit+unit/2]);
+                update_to_top(mapobj[i][j]);
                 //  debug_log(i, j);
-                 const id = obj[i][j] - 10;
-                 update_position(portals[id][portal_cnt[id]], [j*unit+unit/2, i*unit+unit/2]);
-                 update_to_top(portals[id][portal_cnt[id]]);
-                 portal_cnt[id] = portal_cnt[id] + 1;
+                //  const id = obj[i][j] - 10;
+                //  update_position(portals[id][portal_cnt[id]], [j*unit+unit/2, i*unit+unit/2]);
+                //  update_to_top(portals[id][portal_cnt[id]]);
+                //  portal_cnt[id] = portal_cnt[id] + 1;
                 //  debug_log(portal_cnt[id]);
                 //  update_color(update_position(map[i][j], [j * unit+unit/2, i * unit+unit/2]),
                 //     [mp[i][j] * 20, mp[i][j] * 5, mp[i][j] * 20 ,255]);
@@ -237,10 +280,38 @@ function upd_map() {
      update_position(player, [y*unit+unit/2, x*unit+unit/2]);
      update_to_top(player);
 }
+	 */
+
+function upd_map() {
+    for (let i = 0; i < grid; i = i + 1) {
+        for (let j = 0; j < grid; j = j + 1) {
+
+            if (mp[i][j] === 0) {
+                update_position(map[i][j],       [-2 * unit, -2 * unit]);
+                update_position(map_filled[i][j],[-2 * unit, -2 * unit]);
+            } else if (mp[i][j] === 1) {
+                update_position(map[i][j],       [j * unit + unit / 2, i * unit + unit / 2]);
+                update_position(map_filled[i][j],[-2 * unit, -2 * unit]);
+            } else if (mp[i][j] === 3) {
+                update_position(map[i][j],       [-2 * unit, -2 * unit]);
+                update_position(map_filled[i][j],[j * unit + unit / 2, i * unit + unit / 2]);
+            }
+
+            // if (mapobj[i][j] !== undefined) {
+            //     update_position(mapobj[i][j], [j * unit + unit / 2, i * unit + unit / 2]);
+            //     update_to_top(mapobj[i][j]);      // --------------------------------------------------------
+            // }
+        }
+    }
+
+    update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
+    update_to_top(player);                        
+}
+
 // update_scale(background, [4,4]);
 let las = false;
 update_loop(game_state => {
-    // init();
+    init();
     debug_log(get_game_time());
     
     getxy();
@@ -261,6 +332,8 @@ update_loop(game_state => {
      else {
          las = false;
      }
+     update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
+    update_to_top(player);
     //  debug_log("work");
     //  k = k + 1;
     //  debug_log(k);
