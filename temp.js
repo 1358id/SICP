@@ -101,8 +101,8 @@ for (let i = 0; i < grid; i = i + 1) {
 	map_unfilled[i] = [];
     for (let j = 0; j < grid; j = j + 1) { 
 		map_craked[i][j] = false;
-        map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png"), [i * unit+unit/2, j * unit+unit/2]); 
-        map_unfilled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/grey.png"), [i * unit+unit/2, j * unit+unit/2]); 
+        map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png"), [-2*unit, -2*unit]); 
+        map_unfilled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/grey.png"), [-2*unit, -2*unit]); 
         map_filled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png"), [-unit/2, -unit/2]); 
     }
 }
@@ -676,7 +676,7 @@ update_loop(game_state => {
   //     eaten = true; 
   //     snake_length = snake_length + food_growth;
   //     play_audio(eat);
-  // }
+  // }a
   // debug_log(snake_length); // Score
 
   // // Check collision
