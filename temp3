@@ -71,7 +71,7 @@ set_fps(15);
 const size = 600;
 const unit = 20;
 const grid = size / unit;
-const background = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2bg.jpg"),[-1000,-1000]);
+const background = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bgbgbg.JPG"),[-1000,-1000]);
 const prog_bar = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/progress.png"),[-1000,-1000]);
 // const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
 // const title = create_text("SliderCraft: Inertia");
@@ -93,10 +93,12 @@ const player = update_position(create_sprite("https://labs.phaser.io/assets/spri
 
 // const portals = [[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png")]
 //                 ,[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png")]];
-const home  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png"),[-2*size,-2*size]);
-const help  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help.png"),[-2*size,-2*size]);
-const retry = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/reset.png"),[-2*size,-2*size]);
-
+const home  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/List.png"),[-2*size,-2*size]);
+update_scale(home,[0.7,0.7]);
+const help  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/Question-Mark.png"),[-2*size,-2*size]);
+const retry = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/Previous.png"),[-2*size,-2*size]);
+update_scale(help,[0.7,0.7]);
+update_scale(retry,[0.7,0.7]);
 // for (let i = 0; i < 1000; i = i + 1) {
 //   snake[i] = update_color(update_position(create_rectangle(unit, unit), [-unit / 2, -unit / 2]),
 //       [127 + 128 * math_sin(i / 20), 127 + 128 * math_sin(i / 50), 127 + 128 * math_sin(i / 30), 255]); // Store offscreen
@@ -649,6 +651,7 @@ const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/he
 const intro = create_text("AboutGame");
 const diy = create_text("DIY your game");
 const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
+const intro_wd = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_word.PNG");
 const back_menu = create_text("Back");
 update_scale(bg, [4,4]);
 
@@ -670,7 +673,7 @@ function init() {
     button();
     // update_position(retry, [100,550]);
     update_position(background,[size/2,size/2]);
-    update_scale(background,[1,1]);
+    update_scale(background,[0.6,0.6]);
     if (now_level === 0) {
         mp = array_cpy(self_mp);
         obj = array_cpy(self_obj);
@@ -997,6 +1000,7 @@ function upd_menu(bg,txt,box,intro,intro_bg,back_menu){
     update_position(home,[-2*size,-2*size]);
     update_position(diy,[size/2,size/2+70]);
     update_scale(diy,[1.5,1.5]);
+    update_position(intro_wd,[2*size,-2*size]);
 }
 
 function click_start(bg,txt,box,intro){
@@ -1015,6 +1019,8 @@ function click_intro(intro_bg){
     update_position(back_menu,[size/2,size/2+170]);
     update_color(back_menu,[0,0,0,255]);
     update_scale(back_menu,[1.5,1.5]);
+    update_position(intro_wd,[size/2+25,size/2-10]);
+    update_scale(intro_wd,[0.24,0.37]);
 }
 function upd_prog() {
     let filled_cnt = 0;
