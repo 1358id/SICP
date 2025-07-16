@@ -572,6 +572,7 @@ const title = create_text("SliderCraft: Inertia");
 const txt = create_text("Start");
 const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
 const intro = create_text("AboutGame");
+const diy = create_text("DIY your game");
 const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
 const back_menu = create_text("Back");
 update_scale(bg, [4,4]);
@@ -835,7 +836,9 @@ function Home(){
         
     }
 }
-
+function diy(){
+    
+}
 function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
     update_position(bg,[size/2,size/2]);
     update_scale(bg,[1/2,2/3]);
@@ -849,6 +852,7 @@ function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
     update_position(intro_bg,[-2*size,-2*size]);
     update_position(back_menu,[-2*size,-2*size]);
     update_position(home,[-2*size,-2*size]);
+    update_position(diy,[size/2-80,size/2-130]);
 }
 
 function click_start(bg,title,txt,box,intro){
@@ -914,6 +918,9 @@ update_loop(game_state => {
                 update_position(intro_bg,[-2*size,-2*size]);
                 update_position(back_menu,[-2*size,-2*size]);
                 show_intro = false;
+            }//size/2-80,size/2-130
+            if (x<=size/2-50 && x>= size/2-110 && y<=size/2-130 && y>= size/2-160){
+                diy();
             }
         }
         if (show_intro===true){
