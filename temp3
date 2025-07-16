@@ -152,7 +152,7 @@ let alive = true;
 // Create Text Gameobjects
 // const score = update_position(create_text("Score: "), [size - 60, 20]);
 // const game_text = update_color(update_scale(update_position(create_text(""), [size / 2, size / 2]), [2, 2]), [0, 0, 0, 255]);
-const win = update_position(create_text("you win!"),[-100,-100]);
+// const win = update_position(create_text("you win!"),[-100,-100]);
 // const retry = update_position(create_text("Press R to retry"),[-100,-100]);
 
 // Audio
@@ -638,7 +638,7 @@ for (let _ = 0; _ < levels; _ = _ + 1) {
         }
     }
 }
-
+const win = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/winning2.png"),[-2*size,-2*size]);
 const help_bg = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png"),[-2*size,-2*size]);
 const help_back = update_position(create_text("Back"),[-2*size,-2*size]);
 
@@ -963,7 +963,7 @@ function Help(){
     }
     if (show_help === true){
         update_position(help_bg,[size/2,size/2+20]);
-        update_scale(help_bg,[4,4]);
+        update_scale(help_bg,[5,5]);
         update_position(help_back,[size/2,size/2+150]);
         update_color(help_back,[0,0,0,255]);
         update_scale(help_back,[1.5,1.5]);
@@ -1156,9 +1156,10 @@ update_loop(game_state => {
         if (check_passed()) {
             las = true;
             move_dir = [0, 0];
-            update_position(win, [100, 20]);
+            update_position(win, [300, 300]);
+            update_scale(win,[1/2,1/3]);
             cnt = cnt + 1;
-            if (cnt === 10) {
+            if (cnt === 20) {
                 if (now_level === 0) {
                     now_level = -1;
                 }
