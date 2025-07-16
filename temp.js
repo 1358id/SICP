@@ -402,6 +402,7 @@ function init() {
     cnt = 0;
     turn_key = false;
     to_be_init = false;
+    move_dir = [0,0];
     update_position(retry, [100,550]);
     update_position(background,[0,0]);
     update_scale(background,[4,4]);
