@@ -4,16 +4,16 @@ enable_debug(); // Uncomment this to sedde debug info
 const self_mp = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -37,13 +37,13 @@ const self_obj = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -88,7 +88,7 @@ const background = update_position(create_sprite("https://labs.phaser.io/assets/
 // Create Sprite Gameobjects
 // update_scale(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"), [4,4]); // Background
 // const food = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
-const player = update_position(create_sprite("https://labs.phaser.io/assets/sprites/tomato.png"),[-unit,-unit]);
+
 // const _1 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png");
 // const _2 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png");
 
@@ -97,6 +97,7 @@ const player = update_position(create_sprite("https://labs.phaser.io/assets/spri
 const home  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png"),[-2*size,-2*size]);
 const help  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help.png"),[-2*size,-2*size]);
 const retry = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/reset.png"),[-2*size,-2*size]);
+
 
 // for (let i = 0; i < 1000; i = i + 1) {
 //   snake[i] = update_color(update_position(create_rectangle(unit, unit), [-unit / 2, -unit / 2]),
@@ -476,8 +477,6 @@ let y = 0;
 let to_be_init = true;
 let now_level = -1;
 
-let max_level = 1;
-
 const levels = array_length(mp_all);
 for (let _ = 0; _ < levels; _ = _ + 1) {
     debug_log(_);
@@ -568,7 +567,9 @@ for (let _ = 0; _ < levels; _ = _ + 1) {
         }
     }
 }
-
+const help_bg = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png"),[-2*size,-2*size]);
+const help_back = update_position(create_text("Back"),[-2*size,-2*size]);
+const player = update_position(create_sprite("https://labs.phaser.io/assets/sprites/tomato.png"),[-unit,-unit]);
 const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
 const title = create_text("SliderCraft: Inertia");
 const txt = create_text("Start");
@@ -597,14 +598,8 @@ function init() {
     // update_position(retry, [100,550]);
     update_position(background,[0,0]);
     update_scale(background,[4,4]);
-    if (now_level === 0) {
-        mp = array_cpy(self_mp);
-        obj = array_cpy(self_obj);
-    }
-    else {
-        mp = array_cpy(mp_all[now_level]);
-        obj = array_cpy(obj_all[now_level]);
-    }
+    mp = array_cpy(mp_all[now_level]);
+    obj = array_cpy(obj_all[now_level]);
     for (let i = 0; i < grid; i = i + 1) {
         filled[i] = [];
         for (let j = 0; j < grid; j = j + 1) { 
@@ -615,29 +610,11 @@ function init() {
             }
         }
     }
-    if (now_level > 1) {
+    if (now_level !== 1) {
         for (let i = 0; i < grid; i = i + 1) {
             for (let j = 0; j < grid; j = j + 1) { 
                 if (mapobj[now_level - 1][i][j] !== undefined) {
                     update_position(mapobj[now_level - 1][i][j], [-2*unit, -2*unit]); 
-                }
-            }
-        }
-    }
-    if (now_level !== 0) {
-        for (let i = 0; i < grid; i = i + 1) {
-            for (let j = 0; j < grid; j = j + 1) { 
-                if (mapobj[0][i][j] !== undefined) {
-                    update_position(mapobj[0][i][j], [-2*unit, -2*unit]); 
-                }
-            }
-        }
-    }
-    else if (max_level > 0) {
-        for (let i = 0; i < grid; i = i + 1) {
-            for (let j = 0; j < grid; j = j + 1) { 
-                if (mapobj[max_level][i][j] !== undefined) {
-                    update_position(mapobj[max_level][i][j], [-2*unit, -2*unit]); 
                 }
             }
         }
@@ -862,17 +839,37 @@ function Home(){
         
     }
 }
-function _diy(){
-    update_position(bg,[-2*size,-2*size]);
-    update_position(title,[-2*size,-2*size]);
-    update_position(txt,[-2*size,-2*size]);
-    update_position(box,[-2*size,-2*size]);
-    update_position(intro,[-2*size,-2*size]);
-    update_position(diy,[-2*size,-2*size]);
-    now_level = 0;
-    debug_log(now_level);
-    debug_log("####");
+//size/2+250,size/2-150
+let show_help = false;
+function Help(){
+     if (input_left_mouse_down()) {
+        const position = query_pointer_position();
+        const x = position[0];
+        const y = position[1];
+        // debug_log(x);
+        // debug_log(y);
+        if (x<=size/2+280 && x>=size/2+220 && y<=size/2-120 && y>=size/2-180){
+           show_help = true;
+        }
+        if (x<=size/2+30 && x>= size/2-30 && y<=size/2+180 && y>= size/2+120){
+                // upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
+                update_position(help_bg,[-2*size,-2*size]);
+                update_position(help_back,[-2*size,-2*size]);
+                show_help = false;
+            }
+    }
+    if (show_help === true){
+        update_position(help_bg,[size/2,size/2+20]);
+        update_scale(help_bg,[4,4]);
+        update_position(help_back,[size/2,size/2+150]);
+        update_color(help_back,[0,0,0,255]);
+        update_scale(help_back,[1.5,1.5]);
+        update_position(player,[-2*size/2,-2*size/2]);
+    }
 }
+// function diy(){
+    
+// }
 function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
     update_position(bg,[size/2,size/2]);
     update_scale(bg,[1/2,2/3]);
@@ -897,7 +894,7 @@ function click_start(bg,title,txt,box,intro){
     update_position(box,[-2*size,-2*size]);
     update_position(intro,[-2*size,-2*size]);
     update_position(diy,[-2*size,-2*size]);
-    now_level = max_level;
+    now_level = 1;
 }
 function click_intro(intro_bg){
     update_position(intro_bg,[size/2,size/2+20]);
@@ -941,8 +938,6 @@ update_loop(game_state => {
             const position = query_pointer_position();
             const x = position[0];
             const y = position[1];//size/2+60,size/2+20
-            // debug_log(x);
-            // debug_log(y);
             if (x<=size/2+90 && x>=size/2+30 && y<=size/2+50 && y>=size/2-10){
                 click_start(bg,title,txt,box,intro);
                 
@@ -956,11 +951,8 @@ update_loop(game_state => {
                 update_position(back_menu,[-2*size,-2*size]);
                 show_intro = false;
             }//size/2-80,size/2-130
-            if (x<=size/2-50 && x>= size/2-110 && y<=size/2-130 && y>= size/2-160){
-                // debug_log("####");
-                _diy();
-                // now_level = 0;
-                // debug_log(now_level);
+            if (x<=size/2-30 && x>= size/2-130 && y<=size/2-90 && y>= size/2-160){
+                click_start(bg,title,txt,box,intro);
             }
         }
         if (show_intro===true){
@@ -970,18 +962,22 @@ update_loop(game_state => {
     else if (now_level === levels) {
          update_position(bg,[size/2,size/2]);
     }
-    else if (now_level >= 0) {
+    else if (now_level > 0) {
         init();
         debug_log(now_level);
         debug_log(levels);
         debug_log(get_game_time());
+        if (!show_help){
+            getxy();
+            upd_map();
+            Retry();
+            Home();
+        }
         
-        getxy();
         // 
         // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
-        upd_map();
-        Retry();
-        Home();
+        
+        Help();
         //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
         if (las === false) {
             input();
@@ -1000,8 +996,8 @@ update_loop(game_state => {
                 turn_key = !turn_key;
             }
         }
-        update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
-        update_to_top(player);
+        // update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
+        // update_to_top(player);
     
         if (check_passed()) {
             las = true;
@@ -1009,12 +1005,8 @@ update_loop(game_state => {
             update_position(win, [100, 20]);
             cnt = cnt + 1;
             if (cnt === 10) {
-                if (now_level === 0) {
-                    now_level = -1;
-                }
-                else if (now_level < levels) {
+                if (now_level < levels) {
                     now_level = now_level + 1;
-                    max_level = now_level;
                 }
                 cnt = 0;
                 update_position(win, [-100, -120]);
