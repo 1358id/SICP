@@ -1,4 +1,4 @@
-import { get_game_time, create_rectangle, create_sprite, create_text, query_position, update_color, update_position, update_scale, update_text, update_to_top, set_fps, get_loop_count, enable_debug, debug_log, input_key_down, gameobjects_overlap, update_loop, build_game, create_audio, loop_audio, stop_audio, play_audio } from "arcade_2d";
+import { query_pointer_position,input_left_mouse_down,get_game_time, create_rectangle, create_sprite, create_text, query_position, update_color, update_position, update_scale, update_text, update_to_top, set_fps, get_loop_count, enable_debug, debug_log, input_key_down, gameobjects_overlap, update_loop, build_game, create_audio, loop_audio, stop_audio, play_audio } from "arcade_2d";
 // enable_debug(); // Uncomment this to see debug info
 
 
@@ -9,13 +9,23 @@ set_fps(15);
 const size = 600;
 const unit = 20;
 const grid = size / unit;
-const background = create_sprite("https://labs.phaser.io/assets/games/germs/background.png");
+const background = update_position(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"),[-1000,-1000]);
 
+const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
+const title = create_text("SliderCraft: Inertia");
+const txt = create_text("Start");
+const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
+const intro = create_text("AboutGame");
+const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
+const back_menu = create_text("Back");
+// game objects
+const home  = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png");
+const help  = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help.png");
 
 // Create Sprite Gameobjects
 // update_scale(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"), [4,4]); // Background
 // const food = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
-const player = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
+const player = update_position(create_sprite("https://labs.phaser.io/assets/sprites/tomato.png"),[-unit,-unit]);
 // const _1 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png");
 // const _2 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png");
 
@@ -79,7 +89,7 @@ let alive = true;
 // const score = update_position(create_text("Score: "), [size - 60, 20]);
 // const game_text = update_color(update_scale(update_position(create_text(""), [size / 2, size / 2]), [2, 2]), [0, 0, 0, 255]);
 const win = update_position(create_text("you win!"),[-100,-100]);
-const retry = update_position(create_text("Press R to retry"),[100,550]);
+const retry = update_position(create_text("Press R to retry"),[-100,-100]);
 
 // Audio
 const eat = create_audio("https://labs.phaser.io/assets/audio/SoundEffects/key.wav", 1);
@@ -104,11 +114,12 @@ for (let i = 0; i < grid; i = i + 1) {
 		map_craked[i][j] = false;
         map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png"), [-2*unit, -2*unit]); 
         map_unfilled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/grey.png"), [-2*unit, -2*unit]); 
-        map_filled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png"), [-unit/2, -unit/2]); 
+        map_filled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png"), [-unit*2, -unit*2]); 
     }
 }
 
 const mp_all = [
+    [],
 [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -207,6 +218,7 @@ const mp_all = [
 ]
 ];
 const obj_all = [
+    [],
 [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -319,11 +331,13 @@ function array_cpy(xs) {
 }
 let mp = [];
 let obj = [];
+
+let cnt = 0;
 // let ud1 = [];
 
 
 // let portal_cnt = [0,0,0,0,0,0,0,0,0,0];
-update_scale(background, [4,4]);
+update_scale(bg, [4,4]);
 
 let k = 1;
 
@@ -334,7 +348,7 @@ let to_be_init = true;
 let now_level = 0;
 
 const levels = array_length(mp_all);
-for (let _ = 0; _ < levels; _ = _ + 1) {
+for (let _ = 1; _ < levels; _ = _ + 1) {
     debug_log(_);
     mapobj[_] = [];
     for (let i = 0; i < grid; i = i + 1) {
@@ -385,8 +399,12 @@ function init() {
     if (!to_be_init) {
         return undefined;
     }
+    cnt = 0;
     turn_key = false;
     to_be_init = false;
+    update_position(retry, [100,550]);
+    update_position(background,[0,0]);
+    update_scale(background,[4,4]);
     mp = array_cpy(mp_all[now_level]);
     obj = array_cpy(obj_all[now_level]);
     for (let i = 0; i < grid; i = i + 1) {
@@ -399,7 +417,7 @@ function init() {
             }
         }
     }
-    if (now_level !== 0) {
+    if (now_level !== 1) {
         for (let i = 0; i < grid; i = i + 1) {
             for (let j = 0; j < grid; j = j + 1) { 
                 if (mapobj[now_level - 1][i][j] !== undefined) {
@@ -603,55 +621,128 @@ function Retry() {
     
 }
 
+function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
+    update_position(bg,[size/2,size/2]);
+    update_scale(bg,[1/2,2/3]);
+    update_position(title,[size/2,size/2-190]);
+    update_scale(title,[2,2]);
+    update_position(txt,[size/2+60,size/2+20]);
+    update_scale(txt,[2,2]);
+    update_position(box,[size/2-40,size/2+190]);
+    update_scale(box,[3,3]);
+    update_position(intro,[size/2-40,size/2+190]);
+    update_position(intro_bg,[-2*size,-2*size]);
+    update_position(back_menu,[-2*size,-2*size]);
+    update_position(home,[-2*size,-2*size]);
+}
+
+function click_start(bg,title,txt,box,intro){
+    debug_log("####");
+    update_position(bg,[-2*size,-2*size]);
+    update_position(title,[-2*size,-2*size]);
+    update_position(txt,[-2*size,-2*size]);
+    update_position(box,[-2*size,-2*size]);
+    update_position(intro,[-2*size,-2*size]);
+    now_level = 1;
+}
+function click_intro(intro_bg){
+    update_position(intro_bg,[size/2,size/2+20]);
+    update_scale(intro_bg,[4,4]);
+    update_position(back_menu,[size/2,size/2+150]);
+    update_color(back_menu,[0,0,0,255]);
+    update_scale(back_menu,[1.5,1.5]);
+}
+
 // update_scale(background, [4,4]);
 let las = false;
-let cnt = 0;
+let show_intro = false;
+let is_fade = false;
 update_loop(game_state => {
     // if (cnt < 10) {
     //     cnt = cnt + 1;
     //     return undefined;
     // }
-    init();
-    debug_log(get_game_time());
-    
-    getxy();
-    // 
-      // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
-     upd_map();
-     Retry();
-    //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
-     if (las === false) {
-         input();
-     }
-     debug_log(move_dir);
-     if (go()) {
-         upd_map();
-        //  debug_log(x);
-        //  debug_log(y);
-         las = true;
-     }
-     else {
-         las = false;
-		 if (turn_key_flg) {
-			turn_key_flg = false;
-			turn_key = !turn_key;
-		 }
-     }
-     update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
-    update_to_top(player);
-
-    if (check_passed()) {
-        
-        move_dir = [0, 0];
-        update_position(win, [100, 20]);
+    debug_log(now_level);
+    if (now_level===0){
+        upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
         cnt = cnt + 1;
-        if (cnt === 10) {
-            if (now_level < 2) {
-                now_level = now_level + 1;
-            }
+        if (cnt >= 10) { 
+            is_fade = !is_fade;
             cnt = 0;
-            update_position(win, [-100, -120]);
-            to_be_init = true;
+        }
+
+        if (is_fade) {
+            update_color(txt, [255, 255, 255, 200]);
+        } else {
+            update_color(txt, [255, 255, 255, 255]); 
+        }
+    
+        if (input_left_mouse_down()){
+            const position = query_pointer_position();
+            const x = position[0];
+            const y = position[1];//size/2+60,size/2+20
+            if (x<=size/2+90 && x>=size/2+30 && y<=size/2+50 && y>=size/2-10){
+                click_start(bg,title,txt,box,intro);
+                
+            }
+            if (x<=size/2-10 && x >=size/2-70 && y<=size/2+220 && y>=size/2+160){
+                show_intro = true;
+            }
+            if (x<=size/2+30 && x>= size/2-30 && y<=size/2+180 && y>= size/2+120){
+                // upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
+                update_position(intro_bg,[-2*size,-2*size]);
+                update_position(back_menu,[-2*size,-2*size]);
+                show_intro = false;
+            }
+        }
+        if (show_intro===true){
+                  click_intro(intro_bg); 
+                }
+    }
+    else if (now_level > 0) {
+        init();
+        debug_log(get_game_time());
+        
+        getxy();
+        // 
+        // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
+        upd_map();
+        Retry();
+        //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
+        if (las === false) {
+            input();
+        }
+        debug_log(move_dir);
+        if (go()) {
+            upd_map();
+            //  debug_log(x);
+            //  debug_log(y);
+            las = true;
+        }
+        else {
+            las = false;
+            if (turn_key_flg) {
+                turn_key_flg = false;
+                turn_key = !turn_key;
+            }
+        }
+        update_position(player, [y * unit + unit / 2, x * unit + unit / 2]);
+        update_to_top(player);
+    
+        if (check_passed()) {
+            las = true;
+            move_dir = [0, 0];
+            update_position(win, [100, 20]);
+            cnt = cnt + 1;
+            if (cnt === 10) {
+                if (now_level < 3) {
+                    now_level = now_level + 1;
+                }
+                cnt = 0;
+                update_position(win, [-100, -120]);
+                to_be_init = true;
+                las = false;
+            }
         }
     }
     //  debug_log("work");
