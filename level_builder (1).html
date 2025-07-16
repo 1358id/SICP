@@ -138,7 +138,7 @@
     });
 
     function updateOutput() {
-      document.getElementById('mpOutput').value = 'const mp = [\n' + mp.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];\nconst obj = [\n' + obj.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];';
+      document.getElementById('mpOutput').value = 'const self_mp = [\n' + mp.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];\nconst self_obj = [\n' + obj.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];';
     }
   </script>
 </body>
