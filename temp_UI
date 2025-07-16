@@ -53,15 +53,15 @@ update_loop(game_state => {
     if (game_stat[0]===0){
         upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
         cnt = cnt + 1;
-        if (cnt >= 10) { // 每15帧切换一次状态
+        if (cnt >= 10) { 
             is_fade = !is_fade;
             cnt = 0;
         }
 
         if (is_fade) {
-            update_color(txt, [255, 255, 255, 200]); // 半透明
+            update_color(txt, [255, 255, 255, 200]);
         } else {
-            update_color(txt, [255, 255, 255, 255]); // 不透明
+            update_color(txt, [255, 255, 255, 255]); 
         }
     
         if (input_left_mouse_down()){
