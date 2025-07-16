@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Builder</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(30, 20px);
+      grid-template-rows: repeat(30, 20px);
+      gap: 1px;
+      margin: 10px;
+    }
+    .cell {
+      width: 20px;
+      height: 20px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+    }
+    .palette {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .block {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin: 2px 0;
+    }
+    .block img {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="grid" class="grid"></div>
+    <div class="palette" id="palette"></div>
+  </div>
+  <textarea id="mpOutput" readonly></textarea>
+  <textarea id="objOutput" readonly></textarea>
+
+  <script>
+    const BLOCKS = [
+      { name: 'DELETE', mp: 0, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/del.png' },
+      { name: 'FLOOR', mp: 2, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png' },
+      { name: 'WALL', mp: 1, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png' },
+      { name: 'MIRROR', mp: 2, obj: -1, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png' },
+      { name: 'PLAYER', mp: 2, obj: 2, url: 'https://labs.phaser.io/assets/sprites/tomato.png' },
+      { name: 'ONE-WAY L/R', mp: 2, obj: 3, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png' },
+      { name: 'ONE-WAY U/D', mp: 2, obj: 4, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png' },
+      { name: 'BROKEN WALL', mp: 2, obj: 5, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png' },
+      { name: 'TURN UP', mp: 2, obj: 6, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png' },
+      { name: 'TURN DOWN', mp: 2, obj: 7, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png' },
+      { name: 'TURN LEFT', mp: 2, obj: 8, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png' },
+      { name: 'TURN RIGHT', mp: 2, obj: 9, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png' },
+      ...Array.from({ length: 10 }, (_, i) => ({
+        name: `PORTAL${i + 1}`,
+        mp: 2,
+        obj: 10 + i,
+        url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png'
+      })),
+      { name: 'ROTATE-CW', mp: 2, obj: 20, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png' },
+      { name: 'ROTATE-AntiCW', mp: 2, obj: 21, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png' }
+    ];
+
+    const grid = document.getElementById('grid');
+    const palette = document.getElementById('palette');
+    const mp = Array.from({ length: 30 }, () => Array(30).fill(0));
+    const obj = Array.from({ length: 30 }, () => Array(30).fill(0));
+    let currentBlock = BLOCKS[1];
+    let playerPlaced = false;
+
+    for (let i = 0; i < 30; i++) {
+      for (let j = 0; j < 30; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.row = i;
+        cell.dataset.col = j;
+        grid.appendChild(cell);
+
+        cell.addEventListener('click', () => {
+          const r = Number(cell.dataset.row);
+          const c = Number(cell.dataset.col);
+
+          if (currentBlock.name === 'DELETE') {
+            if (obj[r][c] === 2) playerPlaced = false;
+            mp[r][c] = 0;
+            obj[r][c] = 0;
+            cell.style.backgroundImage = 'none';
+            cell.style.backgroundSize = '';
+          } else if (currentBlock.name === 'PLAYER') {
+            if (playerPlaced) return;
+            playerPlaced = true;
+            mp[r][c] = BLOCKS.find(b => b.name === 'FLOOR').mp;
+            obj[r][c] = currentBlock.obj;
+            cell.style.backgroundImage = currentBlock.url ? `url(${currentBlock.url})` : 'none';
+            cell.style.backgroundSize = 'cover';
+          } else {
+            mp[r][c] = currentBlock.mp;
+            obj[r][c] = currentBlock.obj;
+            cell.style.backgroundImage = currentBlock.url ? `url(${currentBlock.url})` : 'none';
+            cell.style.backgroundSize = 'cover';
+          }
+
+          updateOutput();
+        });
+      }
+    }
+
+    BLOCKS.forEach(block => {
+      const el = document.createElement('div');
+      el.className = 'block';
+      el.innerHTML = `<img src="${block.url}" alt="">${block.name}`;
+      el.addEventListener('click', () => {
+        currentBlock = block;
+      });
+      palette.appendChild(el);
+    });
+
+    function updateOutput() {
+      document.getElementById('mpOutput').value = 'const mp = [\n' + mp.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];\nconst obj = [\n' + obj.map(row => '  [' + row.join(', ') + ']').join(',\n') + '\n];';
+    }
+  </script>
+</body>
+</html>
