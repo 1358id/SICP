@@ -79,6 +79,7 @@ let alive = true;
 // const score = update_position(create_text("Score: "), [size - 60, 20]);
 // const game_text = update_color(update_scale(update_position(create_text(""), [size / 2, size / 2]), [2, 2]), [0, 0, 0, 255]);
 const win = update_position(create_text("you win!"),[-100,-100]);
+const retry = update_position(create_text("Press R to retry"),[100,550]);
 
 // Audio
 const eat = create_audio("https://labs.phaser.io/assets/audio/SoundEffects/key.wav", 1);
@@ -384,6 +385,7 @@ function init() {
     if (!to_be_init) {
         return undefined;
     }
+    turn_key = false;
     to_be_init = false;
     mp = array_cpy(mp_all[now_level]);
     obj = array_cpy(obj_all[now_level]);
@@ -391,6 +393,7 @@ function init() {
         filled[i] = [];
         for (let j = 0; j < grid; j = j + 1) { 
             filled[i][j] = 0;
+            map_craked[i][j] = false;
             if (mapobj[now_level][i][j] !== undefined) {
                 update_position(mapobj[now_level][i][j], [j * unit + unit / 2, i * unit + unit / 2]); 
             }
@@ -592,6 +595,14 @@ function check_passed() {
     return true;
 }
 
+function Retry() {
+    // -> to become pause
+    if (input_key_down("r")) {
+        to_be_init = true;
+    }
+    
+}
+
 // update_scale(background, [4,4]);
 let las = false;
 let cnt = 0;
@@ -607,6 +618,7 @@ update_loop(game_state => {
     // 
       // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
      upd_map();
+     Retry();
     //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
      if (las === false) {
          input();
