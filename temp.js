@@ -1,7 +1,69 @@
 import { query_pointer_position,input_left_mouse_down,get_game_time, create_rectangle, create_sprite, create_text, query_position, update_color, update_position, update_scale, update_text, update_to_top, set_fps, get_loop_count, enable_debug, debug_log, input_key_down, gameobjects_overlap, update_loop, build_game, create_audio, loop_audio, stop_audio, play_audio } from "arcade_2d";
-enable_debug(); // Uncomment this to sedde debug info
-
-
+// enable_debug(); // Uncomment this to sedde debug info
+const self_mp = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+const self_obj = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
 
 // Constants
 set_fps(15);
@@ -11,15 +73,15 @@ const unit = 20;
 const grid = size / unit;
 const background = update_position(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"),[-1000,-1000]);
 
-const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
-const title = create_text("SliderCraft: Inertia");
-const txt = create_text("Start");
-const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
-const intro = create_text("AboutGame");
-const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
-const back_menu = create_text("Back");
+// const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
+// const title = create_text("SliderCraft: Inertia");
+// const txt = create_text("Start");
+// const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
+// const intro = create_text("AboutGame");
+// const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
+// const back_menu = create_text("Back");
 // game objects
-const home  = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png");
+// const home  = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png");
 // const help  = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help.png");
 
 // Create Sprite Gameobjects
@@ -31,7 +93,9 @@ const player = update_position(create_sprite("https://labs.phaser.io/assets/spri
 
 // const portals = [[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png")]
 //                 ,[create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png"), create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png")]];
-
+const home  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/home.png"),[-2*size,-2*size]);
+const help  = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help.png"),[-2*size,-2*size]);
+const retry = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/reset.png"),[-2*size,-2*size]);
 
 // for (let i = 0; i < 1000; i = i + 1) {
 //   snake[i] = update_color(update_position(create_rectangle(unit, unit), [-unit / 2, -unit / 2]),
@@ -89,7 +153,7 @@ let alive = true;
 // const score = update_position(create_text("Score: "), [size - 60, 20]);
 // const game_text = update_color(update_scale(update_position(create_text(""), [size / 2, size / 2]), [2, 2]), [0, 0, 0, 255]);
 const win = update_position(create_text("you win!"),[-100,-100]);
-const retry = update_position(create_text("Press R to retry"),[-100,-100]);
+// const retry = update_position(create_text("Press R to retry"),[-100,-100]);
 
 // Audio
 const eat = create_audio("https://labs.phaser.io/assets/audio/SoundEffects/key.wav", 1);
@@ -401,7 +465,7 @@ let cnt = 0;
 
 
 // let portal_cnt = [0,0,0,0,0,0,0,0,0,0];
-update_scale(bg, [4,4]);
+// update_scale(bg, [4,4]);
 
 let k = 1;
 
@@ -409,57 +473,115 @@ let x = 0;
 let y = 0;
 
 let to_be_init = true;
-let now_level = 0;
+let now_level = -1;
+
+let max_level = 1;
 
 const levels = array_length(mp_all);
-for (let _ = 1; _ < levels; _ = _ + 1) {
+for (let _ = 0; _ < levels; _ = _ + 1) {
     debug_log(_);
     mapobj[_] = [];
     for (let i = 0; i < grid; i = i + 1) {
         mapobj[_][i] = [];
         for (let j = 0; j < grid; j = j + 1) { 
             mapobj[_][i][j] = undefined;
-            if (obj_all[_][i][j] >= 10 && obj_all[_][i][j] < 20) {
-                mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png"), [-2*unit, -2*unit]); 
-                // update_position(mapobj[i][j], [j * unit + unit / 2, i * unit + unit / 2]);*
-                // update_to_top(mapobj[i][j]);   
-                
+            if (_ === 0) {
+                if (self_obj[i][j] >= 10 && self_obj[i][j] < 20) {
+                    mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png"), [-2*unit, -2*unit]); 
+                    // update_position(mapobj[i][j], [j * unit + unit / 2, i * unit + unit / 2]);*
+                    // update_to_top(mapobj[i][j]);   
+                    
+                }
+    			if (self_obj[i][j] === 3) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 4) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === -1) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 5) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 6) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 7) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 8) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 9) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 20) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (self_obj[i][j] === 21) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png"), [-2*unit, -2*unit]); 
+    			}
             }
-			if (obj_all[_][i][j] === 3) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 4) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === -1) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 5) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 6) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 7) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 8) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 9) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 20) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png"), [-2*unit, -2*unit]); 
-			}
-			if (obj_all[_][i][j] === 21) {
-				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png"), [-2*unit, -2*unit]); 
-			}
+            else {
+                if (obj_all[_][i][j] >= 10 && obj_all[_][i][j] < 20) {
+                    mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png"), [-2*unit, -2*unit]); 
+                    // update_position(mapobj[i][j], [j * unit + unit / 2, i * unit + unit / 2]);*
+                    // update_to_top(mapobj[i][j]);   
+                    
+                }
+    			if (obj_all[_][i][j] === 3) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 4) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === -1) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 5) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 6) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 7) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 8) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 9) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 20) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png"), [-2*unit, -2*unit]); 
+    			}
+    			if (obj_all[_][i][j] === 21) {
+    				mapobj[_][i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png"), [-2*unit, -2*unit]); 
+    			}
+            }
             // map[i][j] = update_color(update_position(create_rectangle(unit, unit), [i * unit+unit/2, j * unit+unit/2]),
             //             [255,255,255,255]); 
             
         }
     }
+}
+
+const bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bg.png");
+const title = create_text("SliderCraft: Inertia");
+const txt = create_text("Start");
+const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
+const intro = create_text("AboutGame");
+const diy = create_text("DIY your game");
+const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
+const back_menu = create_text("Back");
+update_scale(bg, [4,4]);
+
+function button(){
+    update_position(retry,[size/2+250,size/2-250]);
+    update_position(home,[size/2+250,size/2-200]);
+    update_position(help,[size/2+250,size/2-150]);
 }
 
 function init() {
@@ -470,11 +592,18 @@ function init() {
     turn_key = false;
     to_be_init = false;
     move_dir = [0,0];
-    update_position(retry, [100,550]);
+    button();
+    // update_position(retry, [100,550]);
     update_position(background,[0,0]);
     update_scale(background,[4,4]);
-    mp = array_cpy(mp_all[now_level]);
-    obj = array_cpy(obj_all[now_level]);
+    if (now_level === 0) {
+        mp = array_cpy(self_mp);
+        obj = array_cpy(self_obj);
+    }
+    else {
+        mp = array_cpy(mp_all[now_level]);
+        obj = array_cpy(obj_all[now_level]);
+    }
     for (let i = 0; i < grid; i = i + 1) {
         filled[i] = [];
         for (let j = 0; j < grid; j = j + 1) { 
@@ -485,11 +614,29 @@ function init() {
             }
         }
     }
-    if (now_level !== 1) {
+    if (now_level > 1) {
         for (let i = 0; i < grid; i = i + 1) {
             for (let j = 0; j < grid; j = j + 1) { 
                 if (mapobj[now_level - 1][i][j] !== undefined) {
                     update_position(mapobj[now_level - 1][i][j], [-2*unit, -2*unit]); 
+                }
+            }
+        }
+    }
+    if (now_level !== 0) {
+        for (let i = 0; i < grid; i = i + 1) {
+            for (let j = 0; j < grid; j = j + 1) { 
+                if (mapobj[0][i][j] !== undefined) {
+                    update_position(mapobj[0][i][j], [-2*unit, -2*unit]); 
+                }
+            }
+        }
+    }
+    else if (max_level > 0) {
+        for (let i = 0; i < grid; i = i + 1) {
+            for (let j = 0; j < grid; j = j + 1) { 
+                if (mapobj[max_level][i][j] !== undefined) {
+                    update_position(mapobj[max_level][i][j], [-2*unit, -2*unit]); 
                 }
             }
         }
@@ -517,6 +664,12 @@ function go() {
     }
     let newx = x + move_dir[0];
     let newy = y + move_dir[1];
+    if (obj[x][y] === 3 && move_dir[1] === 0) {
+		return false;
+	}
+	else if (obj[x][y] === 4 && move_dir[0] === 0) {
+		return false;
+	}
     if (mp[newx][newy] === 1) {
 		move_dir[0] = move_dir[1] = 0;
         return false;
@@ -690,12 +843,41 @@ function check_passed() {
 
 function Retry() {
     // -> to become pause
-    if (input_key_down("r")) {
-        to_be_init = true;
+    if (input_left_mouse_down()) {
+        const position = query_pointer_position();
+        const x = position[0];
+        const y = position[1];
+        if (x<=size/2+280 && x>=size/2+220 && y<=size/2-220 && y>=size/2-280){
+            to_be_init = true;
+        }
+        
     }
-    
 }
-
+function Home(){
+    if (input_left_mouse_down()) {
+        const position = query_pointer_position();
+        const x = position[0];
+        const y = position[1];
+        // debug_log(x);
+        // debug_log(y);
+        if (x<=size/2+280 && x>=size/2+220 && y<=size/2-170 && y>=size/2-230){
+            now_level = -1;
+            to_be_init = true;
+        }
+        
+    }
+}
+function _diy(){
+    update_position(bg,[-2*size,-2*size]);
+    update_position(title,[-2*size,-2*size]);
+    update_position(txt,[-2*size,-2*size]);
+    update_position(box,[-2*size,-2*size]);
+    update_position(intro,[-2*size,-2*size]);
+    update_position(diy,[-2*size,-2*size]);
+    now_level = 0;
+    debug_log(now_level);
+    debug_log("####");
+}
 function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
     update_position(bg,[size/2,size/2]);
     update_scale(bg,[1/2,2/3]);
@@ -709,6 +891,7 @@ function upd_menu(bg,title,txt,box,intro,intro_bg,back_menu){
     update_position(intro_bg,[-2*size,-2*size]);
     update_position(back_menu,[-2*size,-2*size]);
     update_position(home,[-2*size,-2*size]);
+    update_position(diy,[size/2-80,size/2-130]);
 }
 
 function click_start(bg,title,txt,box,intro){
@@ -718,7 +901,8 @@ function click_start(bg,title,txt,box,intro){
     update_position(txt,[-2*size,-2*size]);
     update_position(box,[-2*size,-2*size]);
     update_position(intro,[-2*size,-2*size]);
-    now_level = 1;
+    update_position(diy,[-2*size,-2*size]);
+    now_level = max_level;
 }
 function click_intro(intro_bg){
     update_position(intro_bg,[size/2,size/2+20]);
@@ -738,7 +922,13 @@ update_loop(game_state => {
     //     return undefined;
     // }
     debug_log(now_level);
-    if (now_level===0){
+    // const position = query_position(player);
+    // const x = position[0];
+    // const y = position[1];
+    // debug_log(x);
+    //     debug_log(y);
+    if (now_level===-1){
+        update_position(player,[-2*size,2*size]);
         upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
         cnt = cnt + 1;
         if (cnt >= 10) { 
@@ -756,6 +946,8 @@ update_loop(game_state => {
             const position = query_pointer_position();
             const x = position[0];
             const y = position[1];//size/2+60,size/2+20
+            // debug_log(x);
+            // debug_log(y);
             if (x<=size/2+90 && x>=size/2+30 && y<=size/2+50 && y>=size/2-10){
                 click_start(bg,title,txt,box,intro);
                 
@@ -768,6 +960,12 @@ update_loop(game_state => {
                 update_position(intro_bg,[-2*size,-2*size]);
                 update_position(back_menu,[-2*size,-2*size]);
                 show_intro = false;
+            }//size/2-80,size/2-130
+           if (x<=size/2-30 && x>= size/2-130 && y<=size/2-90 && y>= size/2-160){
+                // debug_log("####");
+                _diy();
+                // now_level = 0;
+                // debug_log(now_level);
             }
         }
         if (show_intro===true){
@@ -776,8 +974,9 @@ update_loop(game_state => {
     }
     else if (now_level === levels) {
          update_position(bg,[size/2,size/2]);
+         update_position(player,[-size,-size]);
     }
-    else if (now_level > 0) {
+    else if (now_level >= 0) {
         init();
         debug_log(now_level);
         debug_log(levels);
@@ -788,6 +987,7 @@ update_loop(game_state => {
         // Background // update_text(score, "Score: " + stringify(snake_length - start_length));
         upd_map();
         Retry();
+        Home();
         //  update_position(food, [math_floor(math_random() * dwasasdwawagrid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
         if (las === false) {
             input();
@@ -815,8 +1015,12 @@ update_loop(game_state => {
             update_position(win, [100, 20]);
             cnt = cnt + 1;
             if (cnt === 10) {
-                if (now_level < levels) {
+                if (now_level === 0) {
+                    now_level = -1;
+                }
+                else if (now_level < levels) {
                     now_level = now_level + 1;
+                    max_level = now_level;
                 }
                 cnt = 0;
                 update_position(win, [-100, -120]);
