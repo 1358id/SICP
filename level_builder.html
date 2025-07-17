@@ -37,19 +37,19 @@
     const BLOCKS = [
       { name: 'DELETE', mp: 0, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/del.png' },
       { name: 'FLOOR', mp: 2, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png' },
-      { name: 'WALL', mp: 1, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png' },
+      { name: 'WALL', mp: 1, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bgbgbg.JPG.png' },
       { name: 'MIRROR', mp: 2, obj: -1, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png' },
-      { name: 'PLAYER', mp: 2, obj: 2, url: 'https://labs.phaser.io/assets/sprites/tomato.png' },
+      { name: 'PLAYER', mp: 2, obj: 2, url: 'https://labs.phaser.io/assets/sprites/bluecharacter.png' },
       { name: 'ONE-WAY L/R', mp: 2, obj: 3, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png' },
       { name: 'ONE-WAY U/D', mp: 2, obj: 4, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png' },
-      { name: 'BROKEN WALL', mp: 2, obj: 5, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png' },
-      { name: 'TURN UP', mp: 2, obj: 6, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png' },
-      { name: 'TURN DOWN', mp: 2, obj: 7, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png' },
-      { name: 'TURN LEFT', mp: 2, obj: 8, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png' },
-      { name: 'TURN RIGHT', mp: 2, obj: 9, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png' },
+      { name: 'BROKEN WALL', mp: 2, obj: 5, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/15.png' },
+      { name: 'TURN UP', mp: 2, obj: 6, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up3.png' },
+      { name: 'TURN DOWN', mp: 2, obj: 7, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down3.png' },
+      { name: 'TURN LEFT', mp: 2, obj: 8, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left3.png' },
+      { name: 'TURN RIGHT', mp: 2, obj: 9, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right3.png' },
       ...Array.from({ length: 10 }, (_, i) => ({ name: `PORTAL${i+1}`, mp: 2, obj: 10 + i, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png' })),
-      { name: 'ROTATE-CW', mp: 2, obj: 20, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png' },
-      { name: 'ROTATE-AntiCW', mp: 2, obj: 21, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png' }
+      { name: 'ROTATE-CW', mp: 2, obj: 20, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/mirror_20.png' },
+      { name: 'ROTATE-AntiCW', mp: 2, obj: 21, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/mirror_20.png' }
     ];
 
     const grid = document.getElementById('grid');
