@@ -162,8 +162,8 @@ let alive = true;
 // Audio
 const eat = create_audio("https://labs.phaser.io/assets/audio/SoundEffects/key.wav", 1);
 const lose = create_audio("https://labs.phaser.io/assets/audio/stacker/gamelost.m4a", 1);
-const move = create_audio("https://raw.githubusercontent.com/1358id/SICP/main/audio/biu.m4a", 1);
-const bg_audio = play_audio(loop_audio(create_audio("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/audio/bg_audio.m4a", 0.5)));
+const move = create_audio("https://raw.githubusercontent.com/1358id/SICP/main/audio/biu.m4a", 0.4);
+const bg_audio = play_audio(loop_audio(create_audio("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/audio/bg_audio.m4a", 0.6)));
 
 // Create Update loop
 
