@@ -1310,52 +1310,5 @@ update_loop(game_state => {
             }
         }
     }
-    //  debug_log("work");
-    //  k = k + 1;
-    //  debug_log(k);
-    //  if (k === 10) {
-    //      return undefined;
-    //  } 
-  // update_position(text, [math_floor(math_random() * grid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
-////    update_position(create_text("Hello world!"), [1, 2]);
-  // if (!alive) {
-  //     update_text(game_text, "Game Over!");
-  //     return undefined;
-  // }
-
-  // // Move snake
-  // for (let i = snake_length - 1; i > 0; i = i - 1) {
-  //     update_position(snake[i], query_position(snake[i - 1]));
-  // }
-  // update_position(snake[0], query_position(snake_head)); // Update head
-  // update_position(snake_head, bound_vec(add_vec(query_position(snake_head), move_dir))); // Update head
-  // debug_log(query_position(snake[0])); // Head
-
-  // input();
-
-  // // Add food
-  // if (eaten) {
-  //     update_position(food, [math_floor(math_random() * grid) * unit + unit / 2, math_floor(math_random() * grid) * unit + unit / 2]);
-  //     eaten = false;
-  // }
-
-  // // Eat food
-  // if (get_loop_count() > 1 && gameobjects_overlap(snake_head, food)) {
-  //     eaten = true; 
-  //     snake_length = snake_length + food_growth;
-  //     play_audio(eat);
-  // }a
-  // debug_log(snake_length); // Score
-
-  // // Check collision
-  // if (get_loop_count() > start_length) {
-  //     for (let i = 0; i < snake_length; i = i + 1) {
-  //         if (gameobjects_overlap(snake_head, snake[i])) {
-  //             alive = false;
-  //             play_audio(lose);
-  //             stop_audio(bg_audio);
-  //         }
-  //     }
-  // }
 });
 build_game();
