@@ -1,32 +1,110 @@
-const self_mp = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Builder</title>
+  <style>
+    body { display: flex; flex-direction: column; font-family: sans-serif; margin: 0; padding: 0; }
+    .container { display: flex; padding: 10px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(30, 20px);
+      grid-template-rows: repeat(30, 20px);
+      gap: 1px;
+      margin-right: 12px;
+    }
+    .cell { width: 20px; height: 20px; background-color: #eee; border: 1px solid #ccc; background-size: cover; }
+    .palette { margin: 10px; display: flex; flex-direction: column; }
+    .block { display: flex; align-items: center; cursor: pointer; margin: 2px 0; }
+    .block img { width: 20px; height: 20px; margin-right: 5px; }
+    textarea { font-family: monospace; margin: 10px; white-space: pre; }
+    #mpOutput, #objOutput { width: calc(100% - 20px); height: 100px; }
+    .infoBox { width: 300px; margin: 10px; padding: 8px; border: 1px solid #ccc; font-family: sans-serif; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="grid" class="grid"></div>
+    <div id="palette" class="palette"></div>
+    <div class="infoBox">
+      YOU CAN BUILD YOUR OWN GAME IN THIS SITE. AFTER YOU FINISHED MAKING YOUR GAME, COPY THE CODE BELOW AND REPLACE THE DEFINITION OF self_mp AND self_obj IN THE PLAYGROUND. WHEN YOU'RE BUILDING THE GAME, DON'T FORGET TO PUT FLOOR ON EVERY BLOCK WHICH DOESN'T HAVE SPECIAL OBJECTS.
+    </div>
+  </div>
+  <textarea id="mpOutput" readonly></textarea>
+
+  <script>
+    const BLOCKS = [
+      { name: 'DELETE', mp: 0, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/del.png' },
+      { name: 'FLOOR', mp: 2, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png' },
+      { name: 'WALL', mp: 1, obj: 0, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png' },
+      { name: 'MIRROR', mp: 2, obj: -1, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/tgt.png' },
+      { name: 'PLAYER', mp: 2, obj: 2, url: 'https://labs.phaser.io/assets/sprites/tomato.png' },
+      { name: 'ONE-WAY L/R', mp: 2, obj: 3, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/lr1.png' },
+      { name: 'ONE-WAY U/D', mp: 2, obj: 4, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/ud1.png' },
+      { name: 'BROKEN WALL', mp: 2, obj: 5, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/broke.png' },
+      { name: 'TURN UP', mp: 2, obj: 6, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/up.png' },
+      { name: 'TURN DOWN', mp: 2, obj: 7, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/down.png' },
+      { name: 'TURN LEFT', mp: 2, obj: 8, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/left.png' },
+      { name: 'TURN RIGHT', mp: 2, obj: 9, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/right.png' },
+      ...Array.from({ length: 10 }, (_, i) => ({ name: `PORTAL${i+1}`, mp: 2, obj: 10 + i, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/portal_20x20.png' })),
+      { name: 'ROTATE-CW', mp: 2, obj: 20, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_cw.png' },
+      { name: 'ROTATE-AntiCW', mp: 2, obj: 21, url: 'https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/rotate_acw.png' }
+    ];
+
+    const grid = document.getElementById('grid');
+    const palette = document.getElementById('palette');
+    const mp = Array.from({ length: 30 }, () => Array(30).fill(0));
+    const obj = Array.from({ length: 30 }, () => Array(30).fill(0));
+    let current = BLOCKS[1];
+    let playerPlaced = false;
+
+    for (let i = 0; i < 30; i++) {
+      for (let j = 0; j < 30; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.row = i;
+        cell.dataset.col = j;
+        grid.appendChild(cell);
+        cell.addEventListener('click', () => {
+          const r = Number(cell.dataset.row);
+          const c = Number(cell.dataset.col);
+          if (current.name === 'DELETE') {
+            if (obj[r][c] === 2) playerPlaced = false;
+            mp[r][c] = 0;
+            obj[r][c] = 0;
+            cell.style.backgroundImage = 'none';
+          } else if (current.name === 'PLAYER') {
+            if (playerPlaced) return;
+            playerPlaced = true;
+            mp[r][c] = BLOCKS[1].mp;
+            obj[r][c] = current.obj;
+            cell.style.backgroundImage = `url(${current.url})`;
+          } else {
+            mp[r][c] = current.mp;
+            obj[r][c] = current.obj;
+            cell.style.backgroundImage = `url(${current.url})`;
+          }
+          updateOutput();
+        });
+      }
+    }
+
+    BLOCKS.forEach(b => {
+      const el = document.createElement('div');
+      el.className = 'block';
+      el.innerHTML = `<img src="${b.url}" alt="">${b.name}`;
+      el.onclick = () => current = b;
+      palette.appendChild(el);
+    });
+
+    function updateOutput() {
+      const mpStr = mp.map(r => '  [' + r.join(', ') + ']').join(',\n');
+      const objStr = obj.map(r => '  [' + r.join(', ') + ']').join(',\n');
+      document.getElementById('mpOutput').value = `const self_mp = [\n${mpStr}\n];\nconst self_obj = [\n${objStr}\n];`;
+    }
+
+    updateOutput();
+  </script>
+</body>
+</html>
