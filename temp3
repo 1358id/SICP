@@ -87,7 +87,8 @@ const prog_bar = update_position(create_sprite("https://raw.githubusercontent.co
 // Create Sprite Gameobjects
 // update_scale(create_sprite("https://labs.phaser.io/assets/games/germs/background.png"), [4,4]); // Background
 // const food = create_sprite("https://labs.phaser.io/assets/sprites/tomato.png");
-const player = update_position(create_sprite("https://labs.phaser.io/assets/sprites/tomato.png"),[-unit,-unit]);
+const player = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/bluecharacter.png"),[-unit,-unit]);
+update_scale(player,[0.015,0.015]);
 // const _1 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/1.png");
 // const _2 = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/2.png");
 
@@ -184,7 +185,7 @@ for (let i = 0; i < grid; i = i + 1) {
 	map_unfilled[i] = [];
     for (let j = 0; j < grid; j = j + 1) { 
 		map_craked[i][j] = false;
-        map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/black.png"), [-2*unit, -2*unit]); 
+        map[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/IndustrialTile_73.png"), [-2*unit, -2*unit]); 
         map_unfilled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/grey.png"), [-2*unit, -2*unit]); 
         map_filled[i][j] = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/white_20x20.png"), [-unit*2, -unit*2]); 
     }
@@ -1164,6 +1165,7 @@ update_loop(game_state => {
             move_dir = [0, 0];
             update_position(win, [300, 300]);
             update_scale(win,[1/2,1/3]);
+            update_position(player,[-size,-size]);
             cnt = cnt + 1;
             if (cnt === 20) {
                 if (now_level === 0) {
