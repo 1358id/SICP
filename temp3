@@ -772,6 +772,7 @@ for (let _ = 0; _ < levels; _ = _ + 1) {
 }
 const win = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/winning2.png"),[-2*size,-2*size]);
 const help_bg = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png"),[-2*size,-2*size]);
+const help_text = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/help_text.jpg"),[-2*size,-2*size]);
 const help_back = update_position(create_text("Back"),[-2*size,-2*size]);
 
 
@@ -781,6 +782,7 @@ const txt = create_text("Start Game");
 const box = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/box1.png");
 const intro = create_text("AboutGame");
 const diy = create_text("DIY your game");
+const final = update_position(create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/final.jpg"),[-2*size,-2*size]);
 const intro_bg = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_bg.png");
 const intro_wd = create_sprite("https://raw.githubusercontent.com/1358id/SICP/refs/heads/main/img/intro_word.PNG");
 const back_menu = create_text("Back");
@@ -1088,20 +1090,23 @@ function Help(){
         if (x<=size/2+280 && x>=size/2+220 && y<=size/2-120 && y>=size/2-180){
            show_help = true;
         }
-        if (x<=size/2+30 && x>= size/2-30 && y<=size/2+180 && y>= size/2+120){
+        if (x<=size/2+30 && x>= size/2-30 && y<=size/2+260 && y>= size/2+200){
                 // upd_menu(bg,title,txt,box,intro,intro_bg,back_menu);
                 update_position(help_bg,[-2*size,-2*size]);
                 update_position(help_back,[-2*size,-2*size]);
+                update_position(help_text,[-2*size,-2*size]);
                 show_help = false;
             }
     }
     if (show_help === true){
         update_position(help_bg,[size/2,size/2+20]);
         update_scale(help_bg,[5,5]);
-        update_position(help_back,[size/2,size/2+150]);
+        update_position(help_back,[size/2,size/2+230]);
         update_color(help_back,[0,0,0,255]);
         update_scale(help_back,[1.5,1.5]);
         update_position(player,[-2*size/2,-2*size/2]);
+        update_position(help_text,[size/2,size/2+20]);
+        update_scale(help_text,[0.35,0.35]);
     }
 }
 function _diy(){
@@ -1250,6 +1255,8 @@ update_loop(game_state => {
     else if (now_level === levels) {
          update_position(bg,[size/2,size/2]);
          update_position(player,[-size,-size]);
+         update_position(final,[size/2,size/2+50]);
+         update_scale(final,[0.4,0.4]);
     }
     else if (now_level >= 0) {
         if (now_level === 0){
